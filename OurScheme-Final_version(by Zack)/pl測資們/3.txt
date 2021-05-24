@@ -1,0 +1,65 @@
+3
+  // preparation
+
+  int a1, a2, a3 ;
+  float f1, f2, f3 ;
+  bool b1, b2, b3 ;
+  string s1, s2, s3 ;
+  char c1, c2, c3 ;
+
+  // Problem 1 : test 2/3 (viewable) - isomorphic to Problem 1 test 1
+
+  a1 = 15 ;
+  a2 = -25 ;
+  a3 = 35 ;
+  f1 = -2.5 ;
+  f2 = 3.25 ;
+  f3 = 0.125 ;
+  s1 = "This" ;
+  s2 = "is" ;
+  s3 = "ICE!" ;
+  c1 = 'w' ;
+  c2 = 'h' ;
+  c3 = 'y' ; 
+
+  // + - * / %
+  cout << ( a3 = a2-a3/3 ) << "\n" ;
+  cout << a1*12%a3 << "\n" ;
+  cout << ( a2 = a2*a3/a1+a1 ) << "\n" ;  
+  cout << -a3- -a2 << "\n" ;
+
+  // << >>
+  cout << a1 << "\n" ;
+  cout << ( a2 = a2 << 3 ) << "\n" ;
+  cout << ( a2 = a2 >> 2 ) << "\n" ;
+
+  // && || ! < <= > >=
+  cout << ( b1 = a1 > f2 ) << "\n" ;
+  cout << ( b3 = a1 >= a2 ) << "\n" ;
+  cout << ( b2 = b1 && b3 ) << "\n" ;
+
+  cout << ( b2 || a3 < a1 ) << "\n" ;
+  cout << ( b3 && b2 ) << "\n" ;
+  cout << ( !b3 || !b2 ) << "\n" ;
+  
+  cout << ( true || a3 < a1 ) << "\n" ;
+  cout << ( true && b2 ) << "\n" ;
+  cout << ( b1 = !true || !b2 ) << "\n" ;
+  cout << ( b1 || false ) << "\n" ;
+
+  // ==   !=
+  cout << ( a1 == a1-3+5-2 ) << "\n" ;
+  cout << ( a1 != a1-3+5-2 ) << "\n" ;
+  // cout << ( true && false == false ) << "\n" ; // '==' and '!=' should not be
+  // cout << ( true || true != false ) << "\n" ;  // applied to booleans
+  
+  // string
+  cout << ( s1 = s1 + " " + s2 + " What" ) << "\n" ;
+  cout << s1 << "\n" ;
+  cout << ( s2 = s3 + " " + c1 ) << "\n" ;
+  cout << s2 + " Follow\n" + s3 << "\n" ;
+
+Done   (  
+  ) 
+     ;cout << 10 ; // Program execution
+  cout << 3+5 ;     // should not come here.

@@ -1,0 +1,377 @@
+第一防線： Unrecognized token with first char(不是定義的token)
+                                                                                
+第二防線(token recognized, parse grammar)： Unexpected token(不是預期的token)
+                                                                                
+第三防線(grammar OK, evaluate it)：Undefined identifier(文法正確，但token不存在)
+
+/*
+1
+100 + 200 ;
+100 - 300 ;
+-22-33 ;
+100*-30 ;
+-123 + 2*3 ;
+25 > 12 ;
+100 <= 37 ;
+100 - 25 > 72 ;
+(1+5)*(3+-5)+8 ; 
+(1+5)*(3+5)+8 ;  
+1+5*(3+5)+8 ;    
+quit
+<<
+
+正確的輸出應該是>>Program starts...
+> 300
+> -200
+> -55
+> -3000
+> -117
+> true
+> false
+> true
+> -4
+> 56
+> 49
+> Program exits...<<
+*/
+
+/*
+2
+a:=-9+-18;
+b:=0;
+c:+5;
+a:-1;
+a*1+55%8;
+a*99:=1;
+k+9:=89;
+1+*+9;
+3 *-(100/5+-2) ; 
+u+5
+2 + $$ - 5
+2 + * + 5 + 8
+// 10646161610
+// a/0;
+// a/b;
+123 qwe;
+quit
+<<
+
+// 以下output
+Program starts...
+> -27
+> 0
+> Unrecognized token with first char : ':'
+> Unrecognized token with first char : ':'
+> Unrecognized token with first char : '%'
+> Unexpected token : ':='
+> Unexpected token : ':='
+> Unexpected token : '*'
+> Unexpected token : '('
+> Unexpected token : '2'
+> Unexpected token : '*'
+> Error
+> Error
+> Unexpected token : 'qwe'
+> Program exits...
+// 以上output
+
+/*
+3
+salary := 3000 ;
+this_is_a_name := 500 ;
+monthsPerYear := 12 ;
+income := salary * monthsPerYear ;
+salary := 30000 ;
+( salary * monthsPerYear * 10 ) > 500000 ;
+  ( salary * ( monthsPerYear - 10 ) + 20000 ) * 10 > 
+  ( 30000  * 2 ) * 10               + 2 * 10000 * 10
+  ;
+  ( 20000 + salary * ( monthsPerYear - 10 ) ) * 10 = 
+  2 * 10000 * 10 +             ( 30000  * 2 ) * 10
+  ;
+income * 10 ;
+income * 10 > 50000 ;
+income * 10 > 500000 ;
+quit
+<<
+
+正確的輸出應該是>>Program starts...
+> 3000
+> 500
+> 12
+> 36000
+> 30000
+> true
+> false
+> true
+> 360000
+> true
+> false
+> Program exits...<<
+
+*/
+
+/*
+4
+salary := 3000 ;       // this is to test 
+monthsPerYear := 12 ;  // your comment processing
+  income := salary 
+  *                    // and white space processing
+  monthsPerYear 
+  ;
+incomeX * 10 ;         // this checks undefined identifier
+income * 10 != 50000 ; // unrecognized token
+income * 10 ) 500000 ; // unexpected token
+quit
+additional + input + should + be + ignored ;
+<<
+
+正確的輸出應該是>>Program starts...
+> 3000
+> 12
+> 36000
+> Undefined identifier : 'incomeX'
+> Unrecognized token with first char : '!'
+> Unexpected token : ')'
+> Program exits...<<
+*/
+
+/*
+5
+a:=5;
+a*1%5;
+a :=    9 ;
+1+*+9;
+a*1+55%8;
+a*99 := 1 ;
+quit
+<<
+
+正確的輸出應該是>>Program starts...
+> 5 
+> Unrecognized token with first char : '%'
+> 9 
+> Unexpected token : '*'
+> Unrecognized token with first char : '%'
+> Unexpected token : ':='
+> Program exits...<<
+*/
+
+/*
+6
+2+3;  // the simplest form of commands
+2     +3 // a line-comment here ; useless "input" here :  5+8;
+  ;        // another line-comment ;;; ('5+8;' and ';;;' should be ignored)
+2
++ 3
+
+
+  // Hello!  Hello! Can you do 7 + 8 ?
+
+      ; // your program should always skip white spaces
+
+   2   + 3      
+ 
+     ;      1  + 2 // no input is "got" until there is a line-enter
+// once a command such as '2+3;' is read in, the system 
+  // immediately gives a response ;
+  // but then, the next command '1+2;' is already "partially read in" ;
+  ; 
+2 + $$ - 5
+2 + * + 5 + 8
+
+// once an input error is encountered, the remaining input on the same
+  // line is ignored ; input-processing will resume for the next line
+2
+    +
+    3
+;
+abc := ( 20 * 5 ) + 1 ;
+abc * 2 ;
+bcd * 2 ;
+bcd := 1
+;
+bcd * 2 ;
+bcd := bcd + 10 ;
+e := bcd
+
+  ; e := e + 3 ;
+e > bcd ;
+e < bcd ;
+quit
+<<
+
+正確的輸出應該是>>Program starts...
+> 5
+> 5
+> 5
+> 5
+> 3
+> Unrecognized token with first char : '$'
+> Unexpected token : '*'
+> 5
+> 101
+> 202
+> Undefined identifier : 'bcd'
+> 1
+> 2
+> 11
+> 11
+> 14
+> true
+> false
+> Program exits...<<
+*/
+
+/* // joke := 1+joke+$ ;
+6
+joke := 1+2-3*4+11+joke+$-*+/ ;  // Unrecognized token with first char : '$'
+123//
++//
+2//
+;// 125
+abcd  :=   67  *        $% // Unrecognized token with first char : '$'
+  abcd ; // Undefined identifier : 'abcd'
+  zxcv : = 123; // Unrecognized token with first char : ':'
+  zxc := 1 ;    // 1
+  abcd := zxc
+  +       
+  abcd
+  ;         // Undefined identifier : 'abcd'
+  qaz := zxc * 6 + 12 - 9 ;  // 9
+a := 1 > 2 ;   // Unexpected token : '>'
+-%1+2;                 // Unrecognized token with first char : '%'
+(1&2; // Unrecognized token with first char : '&'
+123 qwe ; // Unexpected token : 'qwe'
+123 456 // Unexpected token : '456' 
+abc 123 // Unexpected token : '123'
+123 abc // Unexpected token : 'abc'
+abc def // Unexpected token : 'def'
+quit
+<<
+*/
+
+
+/*
+7
+abc := 5 ;
+abc*1%5;
+abc > #123
+(1+2)*5+(9-5) ;
+(1+2)*5+(9!%5) ;
+(1+2)*5+(9$5)
+EN := 123 ;
+goodToEat := EN - kerker ;
+abc:=150;
+$abc > 123    
+abc>$123  
+abc > 123 % // abc > 123 :=
+@123>$abc;
+123>abc$;
+123#>abc; // abc>def ; or % or :=
+z *	2 ; z := 1 ;
+1; 2; a; 3; 1+>2 ; 4; 5;
+pass * % ;  1 + 2 ;
+
+quit
+<<
+
+正確的輸出應該是>>Program starts...
+> 5
+> Unrecognized token with first char : '%'
+> Unrecognized token with first char : '#' 
+> 19
+> Unrecognized token with first char : '!'
+> Unrecognized token with first char : '$'
+> 123
+> Unexpected identifier : 'kerker' 
+> 150
+> Unrecognized token with first char : '$'
+> Unrecognized token with first char : '$'
+> Unrecognized token with first char : '%'
+> Unrecognized token with first char : '@'
+> Unrecognized token with first char : '$'
+> Unrecognized token with first char : '#'
+> Unexpected identifier : 'z'
+> 1
+> 1
+> 2
+> Unexpected identifier : 'a'
+> 3
+> Unexpected token : '>'
+> Unrecognized token with first char : '%'
+> Program exits...<<
+
+*/
+
+/*
+8
+
+a:5          // Unrecognized token with first char : ':'
+
+a:=5;        // 5
+
+a:+5;        // Unrecognized token with first char : ':'
+
+a::=+-*/     // Unrecognized token with first char : ':'
+
+a:abc        // Unrecognized token with first char : ':'
+
+a:123        // Unrecognized token with first char : ':'
+
+a:quit       // Unrecognized token with first char : ':'
+
+a:=-9+-18;    // -27
+
+b:=0;          // 0
+
+c:+5;          // Unrecognized token with first char : ':'
+
+a:-1;           // Unrecognized token with first char : ':'
+
+a*1+55%8;      // Unrecognized token with first char : '%'
+
+a*99:=1;      // Unexpected token : ':='
+
+k+9:=89;      // Unexpected token : ':='
+
+1+*+9;          // Unexpected token : '*'
+
+u+5  ;           // Undefined identifier : 'u'
+
+//a/0;        // Error
+
+//a/b;          // Error
+
+123 qwe;       // Unexpected token : 'qwe'
+
+*               // Unexpected token : '*'
+/		// Unexpected token : '/'
+>               // Unexpected token : '>'
+<               // Unexpected token : '<'
+>=		// Unexpected token : '>='
+<=		// Unexpected token : '<='
+<>              // Unexpected token : '<>'
+
+(%+2;         // Unrecognized token with first char : '%'
+
+a:=500;      // 500
+
+a// :=700;   
+
+a// : = 600;  // Unexpected token : 'a'
+
+A
+<
+3
+;             // Undefined identifier : 'A'
+ 
+1+*1-*1 ;     // Unexpected token : '*'
+1+*1-         // Unexpected token : '*'
+*1            // Unexpected token : '*'
+;            // Unexpected token : ';'
+
+1+2;quit    // 3 & quit
+
+*/
+

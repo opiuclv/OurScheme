@@ -1,0 +1,22 @@
+3
+salaryXXX := 5000 * 1 ;        // this is to test 
+monthsPerYearXXX := 10 *    // your comment processing
+  salaryXXX  ;
+  incomeXXX := salaryXXX 
+  +                       // and white space processing
+  monthsPerYearXXX 
+  ;
+salaryXXX := incomeYYY * 10 ;  // this checks undefined identifier
+incomeXXX * ((10 + 50000) % 10 + 20) ; // unrecognized token
+( incomeXXX + 10 ) * salaryXXX  := 500000 + salaryXXX ;    // unexpected token
+quit
+3 + 4 + 5 + 6 + 7
+
+
+
+> 5000
+> 50000
+> 55000
+> Undefined Token = 'incomeYYY'
+> Unrecognized token with first char = '%'
+> Unexpected token = ':='

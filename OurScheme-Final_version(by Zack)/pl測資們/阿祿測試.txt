@@ -1,0 +1,21 @@
+1
+a:5          // Unrecognized token with first char : ':'
+a:=5;        // 5
+a:+5;        // Unrecognized token with first char : ':'
+a::=+-*/     // Unrecognized token with first char : ':'
+a:abc        // Unrecognized token with first char : ':'
+a:123        // Unrecognized token with first char : ':'
+a:quit       // Unrecognized token with first char : ':'
+a:=-9+-18;    // -27
+b:=0;          // 0
+c:+5;          // Unrecognized token with first char : ':'
+a:-1;           // Unrecognized token with first char : ':'
+a*1+55%8;      // Unrecognized token with first char : '%'
+a*99:=1;      // Unexpected token : ':='
+k+9:=89;      // Unexpected token : ':='
+1+*+9;          // Unexpected token : '*'
+u+5  ;           // Undefined identifier : 'u'
+// a/0;        // Error
+// a/b;          // Error
+123 qwe;       // Unexpected token : 'qwe'
+quit

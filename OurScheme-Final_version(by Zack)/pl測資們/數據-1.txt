@@ -1,0 +1,160 @@
+1
+  a:= 1 ;
+  b:= 2 ;
+  c:= 3 ;
+  a+b*c;
+ quit
+
+2
+ 1/0 ; 
+quit
+
+3
+ (_quit=:=;)
+__quit2 
+quit_;
+&$ <<>=<= 
+quit
+
+1
+abc:=150;
+123 >abc $
+quit
+
+4
+EN := 123 ;
+goodToEat := EN - kerker ;
+abc:=150;
+$abc > 123 ;
+abc>$123 ;
+abc > 123 $ ;
+abc$ >123;
+123>$abc;
+123>abc$;
+123$>abc;
+$123 >   abc;
+quit
+
+5
+a:;
+a:=;
+a: =;
+a:=A;
+a:=a;
+a:=1;
+a:=a
+ ;
+quit
+
+6
+100 + 200 ;
+100 - 300 ;
+-22-33 ;
+100*-30 ;
+-123 + 2*3 ;
+25 > 12 ;
+100 <= 37 ;
+100 - 25 > 72 ;
+(1+5)*(3+-5)+8 ; 
+(1+5)*(3+5)+8 ;  
+1+5*(3+5)+8 ;    
+quit
+
+正確的輸出應該是>>Program starts...
+> 300
+> -200
+> -55
+> -3000
+> -117
+> true
+> false
+> true
+> -4
+> 56
+> 49
+> Program exits...<<
+
+7
+salary := 3000 ;
+this_is_a_name := 500 ;
+monthsPerYear := 12 ;
+income := salary * monthsPerYear ;
+income * 10 ;
+income * 10 > 50000 ;
+income * 10 > 500000 ;
+salary := 30000 ;
+( salary * monthsPerYear * 10 ) > 500000 ;
+  ( salary * ( monthsPerYear - 10 ) + 20000 ) * 10 > 
+  ( 30000  * 2 ) * 10               + 2 * 10000 * 10
+  ;
+  ( 20000 + salary * ( monthsPerYear - 10 ) ) * 10 = 
+  2 * 10000 * 10 +             ( 30000  * 2 ) * 10
+  ;
+quit
+<<
+
+正確的輸出應該是>>Program starts...
+> 3000
+> 500
+> 12
+> 36000
+> 360000
+> true
+> false
+> 30000
+> true
+> false
+> true
+> Program exits...<<
+
+8
+a:=5;
+a*1%5;
+quit
+<<
+
+正確的輸出應該是>>Program starts...
+> 5 
+> Unrecognized token with first char : '%'
+> Program exits...<<
+
+9
+a :=    9 ;
+1+*+9;
+a*1+55%8;
+a*99 := 1 ;
+quit
+<<
+
+正確的輸出應該是>>Program starts...
+> 9 
+> Unexpected token : '*'
+> Unrecognized token with first char : '%'
+> Unexpected token : ':='
+> Program exits...<<
+
+10
+abc:=5;
+abc*1%5;
+123 >abc $
+$123 > abc
+abc > 123 $;
+abc > $123
+quit
+<<
+
+> 5
+> Unrecognized token with first char : '%'
+> Unrecognized token with first char : '$'
+> Unrecognized token with first char : '$'
+> Unrecognized token with first char : '$'
+> Unrecognized token with first char : '$'
+> Program exits...<<
+
+11
+abc := 5 ;
+abc > $123
+(1+2)*5+(9-5) ;
+(1+2)*5+(9%%5) ;
+(1+2)*5+(9$5)
+quit
